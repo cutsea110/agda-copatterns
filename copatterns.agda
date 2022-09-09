@@ -1,4 +1,4 @@
-{-# OPTIONS --copatterns #-}
+{-# OPTIONS --guardedness #-}
 record _×_ (A B : Set) : Set where
   constructor _,_
   field
