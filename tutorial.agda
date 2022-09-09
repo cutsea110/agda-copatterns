@@ -38,11 +38,22 @@ merge-split-id : ∀ {A} (xs : Stream A) → merge (split xs) ≈ xs
 hd-≡ (merge-split-id xs) = refl
 tl-≈ (merge-split-id xs) = merge-split-id (tl xs)
 
+-- ℕ atural number
+
 data ℕ : Set where
   zero : ℕ
   succ : ℕ → ℕ
 
-open import Data.String
+foldn : {A : Set} → A → (A → A) → ℕ → A
+foldn c f zero = c
+foldn c f (succ n) = f (foldn c f n)
 
-test : String
-test =  "ℕ ℤ ℚ ℝ ℂ"
+record ℕ∞ : Set where
+  coinductive
+  field
+    prev : ℕ∞
+
+open ℕ∞
+
+next : ℕ∞ → ℕ∞
+prev (next n) = n
